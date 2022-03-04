@@ -1,0 +1,26 @@
+﻿<Page
+    x:Class="Safebox.Views.Login"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Safebox.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Dictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Background="{ThemeResource CMapUwpAcrylicBrush}">
+        <StackPanel Margin="12,12,12,12">
+            <TextBox x:Name="username" Header="Username" Width="250"/>
+            <PasswordBox x:Name="password" Header="Password" Width="250"/>
+            <TextBlock x:Name="message" Foreground="Red" />
+            <Button Margin="190,12,0,0" Content="Login" Click="Button_Click" HorizontalAlignment="Center" />
+            
+        </StackPanel>
+    </Grid>
+</Page>
