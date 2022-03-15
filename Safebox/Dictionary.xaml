@@ -5,8 +5,8 @@
         <ResourceDictionary x:Key="Default">
             <AcrylicBrush x:Key="CMapUwpAcrylicBrush"
                           BackgroundSource="HostBackdrop"
-                          TintColor="Black"
-                          TintOpacity="0.4"
+                          TintColor="{ThemeResource SystemChromeMediumColor}"
+                          TintOpacity="0.5"
                           FallbackColor="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
 
@@ -18,8 +18,8 @@
         <ResourceDictionary x:Key="Light">
             <AcrylicBrush x:Key="CMapUwpAcrylicBrush"
                           BackgroundSource="HostBackdrop"
-                          TintColor="Black"
-                          TintOpacity="0.4"
+                          TintColor="{ThemeResource SystemChromeMediumColor}"
+                          TintOpacity="0.5"
                           FallbackColor="{StaticResource SystemAccentColor}"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
