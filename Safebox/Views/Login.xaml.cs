@@ -46,12 +46,8 @@ namespace Safebox.Views
                         App.user = AesHandler.memEnc(uname);
                         App.pswd = AesHandler.memEnc(pass);
 
-                        GCHandle gch = GCHandle.Alloc(uname, GCHandleType.Pinned);
-                        CryptoCore.ZeroMemory(gch.AddrOfPinnedObject(), uname.Length * 2);
-                        gch.Free();                        
-                        gch = GCHandle.Alloc(pass, GCHandleType.Pinned);
-                        CryptoCore.ZeroMemory(gch.AddrOfPinnedObject(), pass.Length * 2);
-                        gch.Free();
+                        CryptoCore.cleanString(ref uname);
+                        CryptoCore.cleanString(ref pass);
 
                         MainPage.loggedIn = true;
                         this.Frame.Navigate(typeof(MainPage));

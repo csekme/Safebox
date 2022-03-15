@@ -1,4 +1,5 @@
 ﻿using Safebox.Entities;
+using Safebox.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -28,6 +29,7 @@ namespace Safebox.Views
     {
 
         public static PasswordEntity selectedEntity;
+        private int mode = 0;
 
         public PasswordSheet()
         {
@@ -59,6 +61,47 @@ namespace Safebox.Views
 
         private void Edit_Click(object sender, RoutedEventArgs e)
         {
+            if (mode == 0)
+            {
+                Name.IsReadOnly = false;
+                Uri.IsReadOnly = false;
+                Note.IsReadOnly = false;
+                PrivateKey.IsReadOnly = false;
+                UserName.IsReadOnly = false;
+                mode = 1;
+                Edit.Content = "Save";
+            } else if (mode == 1)
+            {
+                Name.IsReadOnly = true;
+                Uri.IsReadOnly = true;
+                Note.IsReadOnly = true;
+                PrivateKey.IsReadOnly = true;
+                UserName.IsReadOnly = true;
+                mode = 0;
+                Edit.Content = "Edit";
+                //save here
+                selectedEntity.Name = Name.Text;
+
+                string u = AesHandler.memDec(App.user);
+                string p = AesHandler.memDec(App.pswd);
+                string value = Password.Password;
+                if (Password.PasswordRevealMode == PasswordRevealMode.Hidden)
+                {
+                    value = AesHandler.Decrypt(p, value, u);                    
+                }                
+               
+                selectedEntity.Password = value;
+                selectedEntity.Note = Note.Text;
+                selectedEntity.PrivateKey = PrivateKey.Text;
+                selectedEntity.Uri = Uri.Text;
+                selectedEntity.Username = UserName.Text;
+
+                PasswordsRepo.update(selectedEntity);
+                
+                CryptoCore.cleanString(ref u);
+                CryptoCore.cleanString(ref p);
+                CryptoCore.cleanString(ref value);
+            }
 
         }
 
@@ -82,6 +125,10 @@ namespace Safebox.Views
                 Password.Password = AesHandler.Encrypt(p, value, u);
                 Password.PasswordRevealMode = PasswordRevealMode.Hidden;
             }
+            CryptoCore.cleanString(ref u);
+            CryptoCore.cleanString(ref p);
+            CryptoCore.cleanString(ref value);
+
         }
 
         private void Password_PreviewKeyDown(object sender, KeyRoutedEventArgs e)
@@ -97,13 +144,19 @@ namespace Safebox.Views
             }
             else
             {
-                e.Handled = true;
+                if (mode == 0) //on show
+                {
+                    e.Handled = true;
+                }
             }
         }
 
         private void Password_Paste(object sender, TextControlPasteEventArgs e)
         {
-            e.Handled= true;
+            if (mode == 0) //on show
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -10,14 +11,26 @@ namespace Safebox
 {
     internal class AesHandler
     {
-        private static string memK = "f!:klo342545z432456zu45645zrtgfv54z6htrvfdpÁQ3FhJn";
-        private static string memS = "__--ErDwn";
+        //Generate temporary key for store string securly in memory
+        private static string memK = System.Guid.NewGuid().ToString();
+        //Generate temporary salt for store string securly
+        private static string memS = System.Guid.NewGuid().ToString();
 
+        /// <summary>
+        /// Encode some string to prevent stole
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>Encoded string</returns>
         public static string memEnc(string text)
-        {
+        {        
             return Encrypt(memK, text, memS);
         }
 
+        /// <summary>
+        /// Decode the encoded text which is temporarily stored in memory.
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns>Decoded string</returns>
         public static string memDec(string text)
         {
             return Decrypt(memK, text, memS);

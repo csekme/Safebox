@@ -15,7 +15,12 @@
         </ResourceDictionary>
     </Page.Resources>
     <Grid Background="{ThemeResource CMapUwpAcrylicBrush}">
-        <StackPanel Margin="12,12,12,12">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="206"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Image Margin="0,30,0,0" Grid.Row="0" Source="/Assets/Square44x44Logo.scale-400.png" Width="176" Height="176" />
+        <StackPanel Grid.Row="1" Margin="12,12,12,12">
             <TextBox x:Name="username" Header="Username" Width="250"/>
             <PasswordBox x:Name="password" Header="Password" Width="250"/>
             <TextBlock x:Name="message" Foreground="Red" />

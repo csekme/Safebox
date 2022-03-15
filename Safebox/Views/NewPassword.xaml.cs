@@ -54,8 +54,13 @@ namespace Safebox.Views
             entity.Uri = Uri.Text;
             entity.Note = Note.Text;
             entity.PrivateKey = PrivateKey.Text;
+            
             PasswordsRepo.insert(entity);
-          
+            entity.Password = null;
+            entity.PrivateKey = null;
+            
+            GC.Collect();
+
             MainPage.PageTo("passwords");
         }
     }

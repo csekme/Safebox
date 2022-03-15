@@ -18,7 +18,17 @@
             <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
                   BackgroundSource="HostBackdrop" TintColor="{ThemeResource SystemChromeMediumColor}" TintOpacity=".7"/>
         </Grid.Resources>
-        <NavigationView x:Name="NavView" Loaded="NavigationView_Loaded" SelectionChanged="NavigationView_SelectionChanged"  PaneDisplayMode="Left" IsSettingsVisible="False">
+        <NavigationView 
+            x:Name="NavView" 
+            Loaded="NavigationView_Loaded" 
+            SelectionChanged="NavigationView_SelectionChanged"  
+            PaneDisplayMode="LeftCompact" 
+            IsSettingsVisible="True"
+            IsBackButtonVisible="Collapsed"
+            IsBackEnabled="False"
+            ExpandedModeThresholdWidth="900"
+            >
+                        
             <NavigationView.MenuItems>
                 <NavigationViewItem  Content="Passwords" Tag="passwords">
                     <NavigationViewItem.Icon>
